@@ -39,7 +39,8 @@ public class Parser {
         if (Pattern.matches("<.*[a-zA-Z0-9\"/\\.\\?]>", line)) {
             list.add(line);
         }
-        if (Pattern.matches("<.*>.*</.*>",line)){
+//        if (Pattern.matches("<.*>.*</.*>",line)){
+        if (Pattern.matches("<.*[a-zA-Z0-9]>.*[a-zA-Z0-9]</.*[a-zA-Z0-9]>", line)) {
             list.add(line);
         }
         helpLine += line;
