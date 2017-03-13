@@ -35,14 +35,32 @@ public class Parser {
 
     }
 
+    private boolean iterator = false;
+
+
     public void parseLine(String line) {
         if (Pattern.matches("<.*[a-zA-Z0-9\"/\\.\\?]>", line)) {
             list.add(line);
+            if (iterator) {
+                list.add(helpLine);
+                helpLine = "";
+            }
+        } else if (Pattern.matches("\\s*<.*>.*</.*>", line)) {
+            String space = new String();
+            space = line.substring(0, line.indexOf('<'));
+            list.add(line.substring(0, line.indexOf('>') + 1));
+            line = line.substring((line.indexOf('>') + 1), line.length());
+            list.add(space + line.substring(0, line.indexOf('<')));
+            line = line.substring((line.indexOf('<')), line.length());
+            list.add(space + line);
+            if (iterator) {
+                list.add(helpLine);
+                helpLine = "";
+
+            }
+        } else {
+            iterator = true;
+            helpLine += line;
         }
-//        if (Pattern.matches("<.*>.*</.*>",line)){
-        if (Pattern.matches("<.*[a-zA-Z0-9]>.*[a-zA-Z0-9]</.*[a-zA-Z0-9]>", line)) {
-            list.add(line);
-        }
-        helpLine += line;
     }
 }
