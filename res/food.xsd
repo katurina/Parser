@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.example.com/food"
+        xmlns:tns="http://www.example.com/food">
+
+    <element name="name" type="string"/>
+    <element name="kallories" type="int"/>
+    <element name="proteins" type="int"/>
+    <element name="carbohydrates" type="int"/>
+    <element name="fats" type="int"/>
+    <element name="with-solt" type="string"/>
+    <element name="with-sugar" type="string"/>
+    <element name="with-spicy" type="string"/>
+
+    <element name="food" type="tns:foodType"/>
+    <element name="dish" type="tns:dishType"/>
+    <element name="taste" type="tns:tasteType"/>
+
+    <complexType name="foodType">
+        <sequence>
+            <element ref="tns:dish" minOccurs="1" maxOccurs="unbounded" />
+
+        </sequence>
+    </complexType>
+
+    <complexType name="dishType">
+        <sequence>
+            <element ref="tns:name"/>
+            <element ref="tns:kallories"/>
+            <element ref="tns:proteins"/>
+            <element ref="tns:carbohydrates"/>
+            <element ref="tns:fats"/>
+            <element ref="tns:taste"/>
+
+        </sequence>
+        <attribute name="id" type="ID" use="required"/>
+    </complexType>
+    <complexType name="tasteType">
+        <sequence>
+            <element ref="tns:with-solt"/>
+            <element ref="tns:with-sugar"/>
+            <element ref="tns:with-spicy"/>
+        </sequence>
+    </complexType>
+
+</schema>

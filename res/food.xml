@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<food xmlns="http://www.example.com/food"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.example.com/food food.xsd" >
+<dish id="i1">
+    <name>potato</name>
+    <kallories>250</kallories>
+    <proteins>5</proteins>
+    <carbohydrates>85</carbohydrates>
+    <fats>10</fats>
+    <taste>
+        <with-solt>nice</with-solt>
+        <with-sugar>disgusting</with-sugar>
+        <with-spicy>sometimes</with-spicy>
+    </taste>
+</dish>
+<dish id="i2">
+    <name>rice</name>
+    <kallories>310</kallories>
+    <proteins>10</proteins>
+    <carbohydrates>85</carbohydrates>
+    <fats>5</fats>
+    <taste>
+        <with-solt>nice</with-solt>
+        <with-sugar>disgusting</with-sugar>
+        <with-spicy>nice</with-spicy>
+    </taste>
+</dish>
+<dish id="i3">
+    <name>ice-cream</name>
+    <kallories>260</kallories>
+    <proteins>3</proteins>
+    <carbohydrates>75</carbohydrates>
+    <fats>22</fats>
+    <taste>
+        <with-solt>disgusting</with-solt>
+        <with-sugar>not necessary</with-sugar>
+        <with-spicy>nice</with-spicy>
+    </taste>
+</dish>
+
+</food>
