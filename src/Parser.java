@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -12,8 +13,8 @@ import java.util.regex.Pattern;
  */
 public class Parser {
     private final String fileName;
-    private ArrayList<String> list = new ArrayList<>();
-    private String helpLine;
+    private List<String> list = new ArrayList<>();
+
 
     public Parser(String filename) {
         this.fileName = filename;
@@ -36,23 +37,24 @@ public class Parser {
     }
 
     private boolean iterator = false;
-
+    private String helpLine;
+    private static final Pattern TAG_PATTERN=Pattern.compile("<.*[^>^<]>");
+    private static final Pattern TAG2_PATTERN=Pattern.compile("\\s*<.*>.*</.*>");
 
     public void parseLine(String line) {
-        if (Pattern.matches("<.*[a-zA-Z0-9\"/\\.\\?]>", line)) {
+        if (TAG_PATTERN.matcher(line).matches()) {
             if (iterator) {
                 list.add(helpLine);
                 helpLine = "";
             }
             list.add(line);
 
-        } else if (Pattern.matches("\\s*<.*>.*</.*>", line)) {
+        } else if (TAG2_PATTERN.matcher(line).matches()) {
             if (iterator) {
                 list.add(helpLine);
                 helpLine = "";
             }
-            String space = new String();
-            space = line.substring(0, line.indexOf('<'));
+            String space = line.substring(0, line.indexOf('<'));
             list.add(line.substring(0, line.indexOf('>') + 1));
             line = line.substring((line.indexOf('>') + 1), line.length());
             list.add(space + line.substring(0, line.indexOf('<')));
