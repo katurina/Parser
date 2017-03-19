@@ -1,9 +1,9 @@
-import java.awt.*;
+import Exceptions.Read;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -38,7 +38,7 @@ public class Parser {
 
     private boolean iterator = false;
     private String helpLine;
-    private static final Pattern TAG_PATTERN = Pattern.compile("\\s*<.*[^>^<]>");
+    private static final Pattern TAG_PATTERN = Pattern.compile("<.*[^>^<]>");
     private static final Pattern TAG2_PATTERN = Pattern.compile("\\s*<.*>.*</.*>");
 
     public void parseLine(String line) {
@@ -47,7 +47,7 @@ public class Parser {
             if (iterator) {
                 list.add(helpLine);
                 helpLine = "";
-                iterator=false;
+                iterator = false;
             }
             line = line.substring(line.indexOf('<'), line.length());
             list.add(line);
@@ -56,7 +56,7 @@ public class Parser {
             if (iterator) {
                 list.add(helpLine);
                 helpLine = "";
-                iterator=false;
+                iterator = false;
             }
 
             list.add(line.substring(line.indexOf('<'), line.indexOf('>') + 1));
