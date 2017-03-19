@@ -11,18 +11,14 @@
     <element name="with-solt" type="string"/>
     <element name="with-sugar" type="string"/>
     <element name="with-spicy" type="string"/>
-
     <element name="food" type="tns:foodType"/>
     <element name="dish" type="tns:dishType"/>
     <element name="taste" type="tns:tasteType"/>
-
     <complexType name="foodType">
         <sequence>
             <element ref="tns:dish" minOccurs="1" maxOccurs="unbounded" />
-
         </sequence>
     </complexType>
-
     <complexType name="dishType">
         <sequence>
             <element ref="tns:name"/>
@@ -31,7 +27,6 @@
             <element ref="tns:carbohydrates"/>
             <element ref="tns:fats"/>
             <element ref="tns:taste"/>
-
         </sequence>
         <attribute name="id" type="ID" use="required"/>
     </complexType>

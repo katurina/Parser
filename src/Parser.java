@@ -38,32 +38,40 @@ public class Parser {
 
     private boolean iterator = false;
     private String helpLine;
-    private static final Pattern TAG_PATTERN=Pattern.compile("<.*[^>^<]>");
-    private static final Pattern TAG2_PATTERN=Pattern.compile("\\s*<.*>.*</.*>");
+    private static final Pattern TAG_PATTERN = Pattern.compile("\\s*<.*[^>^<]>");
+    private static final Pattern TAG2_PATTERN = Pattern.compile("\\s*<.*>.*</.*>");
 
     public void parseLine(String line) {
+
         if (TAG_PATTERN.matcher(line).matches()) {
             if (iterator) {
                 list.add(helpLine);
                 helpLine = "";
+                iterator=false;
             }
+            line = line.substring(line.indexOf('<'), line.length());
             list.add(line);
 
         } else if (TAG2_PATTERN.matcher(line).matches()) {
             if (iterator) {
                 list.add(helpLine);
                 helpLine = "";
+                iterator=false;
             }
-            String space = line.substring(0, line.indexOf('<'));
-            list.add(line.substring(0, line.indexOf('>') + 1));
+
+            list.add(line.substring(line.indexOf('<'), line.indexOf('>') + 1));
             line = line.substring((line.indexOf('>') + 1), line.length());
-            list.add(space + line.substring(0, line.indexOf('<')));
-            line = line.substring((line.indexOf('<')), line.length());
-            list.add(space + line);
+            list.add(line.substring(0, line.indexOf('<')));
+            line = line.substring(line.indexOf('<'), line.length());
+            list.add(line);
 
         } else {
             iterator = true;
-            helpLine += line;
+            if (helpLine == null) {
+                helpLine = line;
+            } else {
+                helpLine += line;
+            }
         }
     }
 }
