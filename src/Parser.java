@@ -28,12 +28,19 @@ public class Parser {
         while ((line = br.readLine()) != null) {
             parseLine(line);
         }
-        br.close();
-        fr.close();
+        try {
+            close(br, fr);
+        } catch (Read e) {
+        }
         for (String k : list) {
             System.out.println(k);
         }
 
+    }
+
+    public void close(BufferedReader br, FileReader fr) throws Read, IOException{
+        br.close();
+        fr.close();
     }
 
     private boolean iterator = false;
