@@ -1,4 +1,5 @@
 import Exceptions.Read;
+import interfaces.ReadSource;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,7 +12,7 @@ import java.util.regex.Pattern;
 /**
  * Created by Bird on 04.03.2017.
  */
-public class Parser {
+public class Parser implements ReadSource{
     private final String fileName;
     private List<String> list = new ArrayList<>();
 
@@ -80,5 +81,10 @@ public class Parser {
                 helpLine += line;
             }
         }
+    }
+
+    @Override
+    public String nextString() {
+        return null;
     }
 }
