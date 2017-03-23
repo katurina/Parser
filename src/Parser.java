@@ -1,5 +1,4 @@
-import Exceptions.Read;
-import interfaces.ReadSource;
+import exception.ReadException;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -23,15 +22,16 @@ public class Parser implements ReadSource{
 
     public void readUsingBufferedReader() throws IOException {
         File file = new File(fileName);
+        try {
         FileReader fr = new FileReader(file);
         BufferedReader br = new BufferedReader(fr);
         String line;
         while ((line = br.readLine()) != null) {
             parseLine(line);
         }
-        try {
+
             close(br, fr);
-        } catch (Read e) {
+        } catch (IOException e) {
         }
         for (String k : list) {
             System.out.println(k);
@@ -39,7 +39,7 @@ public class Parser implements ReadSource{
 
     }
 
-    public void close(BufferedReader br, FileReader fr) throws Read, IOException{
+    public void close(BufferedReader br, FileReader fr) throws IOException{
         br.close();
         fr.close();
     }
@@ -81,10 +81,5 @@ public class Parser implements ReadSource{
                 helpLine += line;
             }
         }
-    }
-
-    @Override
-    public String nextString() {
-        return null;
     }
 }
